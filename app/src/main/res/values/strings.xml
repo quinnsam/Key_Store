@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Key_Store</string>
+
+    <string name="title_section1">Save PubKey</string>
+    <string name="title_section2">View PubKey</string>
+    <string name="title_section3">Delete PubKey</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_savekey">Save Pubkey</string>
+
+    <string name="hello_world">Hello world!</string>
+</resources>
