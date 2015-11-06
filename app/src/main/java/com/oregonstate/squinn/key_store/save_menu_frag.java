@@ -1,6 +1,9 @@
 package com.oregonstate.squinn.key_store;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +13,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioButton;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -72,8 +78,43 @@ public class save_menu_frag extends Fragment {
 
     public void postPubkey() throws Exception {
 
+
         android.os.StrictMode.ThreadPolicy policy = new android.os.StrictMode.ThreadPolicy.Builder().permitAll().build();
         android.os.StrictMode.setThreadPolicy(policy);
+
+        // Get Values from layout.
+        EditText edit_name = (EditText) getActivity().findViewById(R.id.name);
+        String print_name = edit_name.getText().toString();
+        EditText edit_email = (EditText) getActivity().findViewById(R.id.email);
+        String print_email = edit_email.getText().toString();
+        EditText edit_comment = (EditText) getActivity().findViewById(R.id.comment);
+        String print_comment = edit_comment.getText().toString();
+        //RadioButton edit_rsa = (RadioButton) getActivity().findViewById(R.id.rsa);
+        RadioButton edit_dsa = (RadioButton) getActivity().findViewById(R.id.dsa);
+        String print_encType = "";
+        if (edit_dsa.isChecked()) {
+            print_encType = "DSA";
+        } else {
+            print_encType = "RSA";
+        }
+        CheckBox edit_exp = (CheckBox) getActivity().findViewById(R.id.exp);
+        Boolean print_exp = edit_exp.isChecked();
+        String print_expDate = "";
+        String print_expTime = "";
+        if (print_exp) {
+            print_expDate = "N/A";
+            print_expTime = "N/A";
+            print_exp = Boolean.FALSE;
+        } else {
+            EditText edit_expDate = (EditText) getActivity().findViewById(R.id.date);
+            print_expDate = edit_expDate.getText().toString();
+            EditText edit_expTime = (EditText) getActivity().findViewById(R.id.time);
+            print_expTime = edit_expTime.getText().toString();
+            print_exp = Boolean.TRUE;
+        }
+        EditText edit_pubkey = (EditText) getActivity().findViewById(R.id.pubkey);
+        String print_pubkey = edit_pubkey.getText().toString();
+
 
         String urlstring = "http://cs496-hw03-api.appspot.com/pubkey";
         URL url = new URL(urlstring);
@@ -88,16 +129,21 @@ public class save_menu_frag extends Fragment {
                 .scheme("http")
                 .authority("cs496-hw03-api.appspot.com")
                 .path("pubkey")
-                .appendQueryParameter("full-name", "Android Tester")
-                .appendQueryParameter("email", "AndroidTester@Androidemail.com")
-                .appendQueryParameter("comment", "Android Tester comment")
-                .appendQueryParameter("expiration", "False")
-                .appendQueryParameter("pubkey", "Android Public key test.. Weeewwwww");
+                .appendQueryParameter("full-name", print_name)
+                .appendQueryParameter("email", print_email)
+                .appendQueryParameter("comment", print_comment)
+                .appendQueryParameter("Encryption-type", print_encType)
+                .appendQueryParameter("bit-strenght", print_comment)
+                .appendQueryParameter("exp-date", print_expDate)
+                .appendQueryParameter("exp-time", print_expTime)
+                .appendQueryParameter("expiration", print_exp.toString())
+                .appendQueryParameter("pubkey", print_pubkey);
 
         String query = builder.build().getEncodedQuery();
 
-        System.out.println(query);
-        System.out.println(builder.build());
+        System.out.println("Network" + isNetworkAvailable());
+        //System.out.println(builder.build());
+        //EditText print_name = (EditText) getActivity().findViewById(R.id.comment);
 
         // Send POST request
         conn.setDoOutput(true);
@@ -105,6 +151,7 @@ public class save_menu_frag extends Fragment {
         wr.writeBytes(query);
         wr.flush();
         wr.close();
+
 
         int responseCode = conn.getResponseCode();
         System.out.println("\nSending 'POST' request to URL : " + url);
@@ -124,6 +171,13 @@ public class save_menu_frag extends Fragment {
         // Print Result
         System.out.println(response.toString());
 
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
 

@@ -2,186 +2,136 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Full Name:"
-        android:id="@+id/name"
-        android:layout_marginStart="23dp"
-        android:textStyle="bold"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/editText2" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Email:"
-        android:id="@+id/email"
-        android:textStyle="bold"
-        android:layout_alignBottom="@+id/editText2"
-        android:layout_alignStart="@+id/name" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Comment:"
-        android:id="@+id/comment"
-        android:textStyle="bold"
-        android:layout_marginTop="14dp"
-        android:layout_below="@+id/email"
-        android:layout_alignStart="@+id/email" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Encryption Type:"
-        android:id="@+id/rsa"
-        android:textStyle="bold"
-        android:layout_alignTop="@+id/rsa"
-        android:layout_alignStart="@+id/exp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Bit Strength:"
-        android:id="@+id/bit"
-        android:textStyle="bold"
-        android:layout_above="@+id/exp"
-        android:layout_alignStart="@+id/expDate" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Expiration:"
-        android:id="@+id/exp"
-        android:textStyle="bold"
-        android:layout_below="@+id/editText4"
-        android:layout_alignEnd="@+id/comment" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Expiration Date:"
-        android:id="@+id/expDate"
-        android:textStyle="bold"
-        android:layout_above="@+id/editText6"
-        android:layout_alignStart="@+id/exp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Expiration Time:"
-        android:id="@+id/expTime"
-        android:textStyle="bold"
-        android:layout_alignBottom="@+id/editText6"
-        android:layout_alignStart="@+id/exp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Public Key:"
-        android:id="@+id/pubKey"
-        android:textStyle="bold"
-        android:layout_alignBottom="@+id/editText7"
-        android:layout_alignStart="@+id/comment" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentStart="true">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Full Name:"
+            android:id="@+id/text_name"
+            android:textStyle="bold"
+            android:paddingLeft="10dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText3"
-        android:layout_alignTop="@+id/comment"
-        android:layout_alignStart="@+id/editText2"
-        android:layout_alignParentEnd="true" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/name"
+            android:text="Name" />
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RSA"
-        android:id="@+id/rsa"
-        android:checked="true"
-        android:layout_below="@+id/editText3"
-        android:layout_alignStart="@+id/editText3" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Email:"
+            android:id="@+id/text_email"
+            android:textStyle="bold"
+            android:paddingLeft="10dp" />
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DSA"
-        android:id="@+id/dsa"
-        android:checked="false"
-        android:layout_below="@+id/editText3"
-        android:layout_toEndOf="@+id/rsa"
-        android:layout_marginStart="31dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/email"
+            android:text="Email" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editText4"
-        android:layout_below="@+id/rsa"
-        android:layout_alignParentEnd="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Comment:"
+            android:id="@+id/text_comment"
+            android:paddingLeft="10dp"
+            android:textStyle="bold" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Never Expires"
-        android:id="@+id/expCheck"
-        android:layout_below="@+id/editText4"
-        android:layout_alignStart="@+id/rsa"
-        android:checked="true" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/comment"
+            android:text="Optional" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/editText5"
-        android:layout_below="@+id/expCheck"
-        android:layout_alignParentEnd="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Encryption Type:"
+            android:id="@+id/text_encType"
+            android:textStyle="bold"
+            android:paddingLeft="10dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/editText6"
-        android:layout_below="@+id/editText5"
-        android:layout_alignParentEnd="true" />
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RSA"
+            android:id="@+id/rsa"
+            android:checked="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/editText7"
-        android:layout_below="@+id/editText6"
-        android:layout_alignParentEnd="true" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DSA"
+            android:id="@+id/dsa"
+            android:checked="false" />
+        </RadioGroup>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Expiration:"
+            android:id="@+id/text_exp"
+            android:paddingLeft="10dp"
+            android:textStyle="bold" />
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Never Expires"
+            android:id="@+id/exp"
+            android:checked="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/time"
+            android:text="Time" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/date"
+            android:text="Date" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Public Key:"
+            android:id="@+id/text_pubkey"
+            android:textStyle="bold"
+            android:paddingLeft="10dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/pubkey"
+            android:text="Public Encryptionn Key here." />
+
+    </LinearLayout>
 </RelativeLayout>
