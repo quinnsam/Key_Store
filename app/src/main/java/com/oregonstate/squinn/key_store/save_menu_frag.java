@@ -20,6 +20,7 @@ import android.widget.RadioButton;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -43,10 +44,11 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class save_menu_frag extends Fragment {
     View rootview;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootview = inflater.inflate(R.layout.save_layout,container,false);
+        rootview = inflater.inflate(R.layout.save_layout, container, false);
         setHasOptionsMenu(true);
         return rootview;
     }
@@ -116,14 +118,14 @@ public class save_menu_frag extends Fragment {
         String print_pubkey = edit_pubkey.getText().toString();
 
 
-        String urlstring = "http://cs496-hw03-api.appspot.com/pubkey";
-        URL url = new URL(urlstring);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        //String urlstring = "http://cs496-hw03-api.appspot.com/pubkey";
+        //URL url = new URL(urlstring);
+        //HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-        // Add request Headers
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("Accept", "application/json");
-        conn.setUseCaches(false);
+        //// Add request Headers
+        //conn.setRequestMethod("POST");
+        //conn.setRequestProperty("Accept", "application/json");
+        //conn.setUseCaches(false);
 
         Uri.Builder builder = new Uri.Builder()
                 .scheme("http")
@@ -141,35 +143,60 @@ public class save_menu_frag extends Fragment {
 
         String query = builder.build().getEncodedQuery();
 
-        System.out.println("Network" + isNetworkAvailable());
+        System.out.println("Network: " + isNetworkAvailable());
         //System.out.println(builder.build());
         //EditText print_name = (EditText) getActivity().findViewById(R.id.comment);
 
-        // Send POST request
-        conn.setDoOutput(true);
-        DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-        wr.writeBytes(query);
-        wr.flush();
-        wr.close();
+        if (isNetworkAvailable()) {
+            System.out.println("Connected to saving to API");
+            // Configure Connection
+            String urlstring = "http://cs496-hw03-api.appspot.com/pubkey";
+            URL url = new URL(urlstring);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
+            // Add request Headers
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setUseCaches(false);
 
-        int responseCode = conn.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + query);
-        System.out.println("Response Code : " + responseCode);
+            // Send POST request
+            conn.setDoOutput(true);
+            DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+            wr.writeBytes(query);
+            wr.flush();
+            wr.close();
+            int responseCode = conn.getResponseCode();
+            System.out.println("\nSending 'POST' request to URL : " + url);
+            System.out.println("Post parameters : " + query);
+            System.out.println("Response Code : " + responseCode);
 
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(conn.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
 
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            // Print Result
+            System.out.println(response.toString());
+        } else { // Not Connected to the network
+            System.out.println("Not connected to internet saving to file");
+            String filename = ((EditText) getActivity().findViewById(R.id.name)).getText()
+                    .toString().replaceAll("\\s+", "");
+            FileOutputStream saveFile;
+
+            try {
+                saveFile = getActivity().openFileOutput(filename, Context.MODE_PRIVATE);
+                saveFile.write(query.getBytes());
+                saveFile.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        in.close();
 
-        // Print Result
-        System.out.println(response.toString());
 
     }
 
