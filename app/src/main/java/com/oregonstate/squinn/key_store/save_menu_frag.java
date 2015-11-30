@@ -64,7 +64,7 @@ public class save_menu_frag extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.action_save) {
-            android.widget.Toast.makeText(getActivity(), "Saved Pubkey", android.widget.Toast.LENGTH_SHORT).show();
+            //android.widget.Toast.makeText(getActivity(), "Saved Pubkey", android.widget.Toast.LENGTH_SHORT).show();
             // Store key to data base
             try {
                 postPubkey();
@@ -87,8 +87,16 @@ public class save_menu_frag extends Fragment {
         // Get Values from layout.
         EditText edit_name = (EditText) getActivity().findViewById(R.id.name);
         String print_name = edit_name.getText().toString();
+        if (print_name.equals("Name") || print_name.isEmpty()) {
+            android.widget.Toast.makeText(getActivity(), "Error Name is required", android.widget.Toast.LENGTH_SHORT).show();
+            return;
+        }
         EditText edit_email = (EditText) getActivity().findViewById(R.id.email);
         String print_email = edit_email.getText().toString();
+        if (print_email.equals("Email") || print_email.isEmpty()) {
+            android.widget.Toast.makeText(getActivity(), "Error Email is required", android.widget.Toast.LENGTH_SHORT).show();
+            return;
+        }
         EditText edit_comment = (EditText) getActivity().findViewById(R.id.comment);
         String print_comment = edit_comment.getText().toString();
         //RadioButton edit_rsa = (RadioButton) getActivity().findViewById(R.id.rsa);
@@ -109,13 +117,25 @@ public class save_menu_frag extends Fragment {
             print_exp = Boolean.FALSE;
         } else {
             EditText edit_expDate = (EditText) getActivity().findViewById(R.id.date);
-            print_expDate = edit_expDate.getText().toString();
             EditText edit_expTime = (EditText) getActivity().findViewById(R.id.time);
+            print_expDate = edit_expDate.getText().toString();
             print_expTime = edit_expTime.getText().toString();
+            if (print_expDate.equals("Date") || print_expDate.isEmpty()) {
+                android.widget.Toast.makeText(getActivity(), "Error Expire Date is required", android.widget.Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (print_expTime.equals("Time") || print_expTime.isEmpty()) {
+                android.widget.Toast.makeText(getActivity(), "Error Expire Time is required", android.widget.Toast.LENGTH_SHORT).show();
+                return;
+            }
             print_exp = Boolean.TRUE;
         }
         EditText edit_pubkey = (EditText) getActivity().findViewById(R.id.pubkey);
         String print_pubkey = edit_pubkey.getText().toString();
+        if (print_pubkey.equals("Public Encryption Key here.") || print_pubkey.isEmpty()) {
+            android.widget.Toast.makeText(getActivity(), "Error Public Key is required", android.widget.Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
         //String urlstring = "http://cs496-hw03-api.appspot.com/pubkey";
@@ -197,6 +217,7 @@ public class save_menu_frag extends Fragment {
             }
         }
 
+        android.widget.Toast.makeText(getActivity(), "Key Saved", android.widget.Toast.LENGTH_SHORT).show();
 
     }
 

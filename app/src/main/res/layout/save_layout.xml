@@ -103,7 +103,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date"
+            android:inputType="time"
             android:ems="10"
             android:id="@+id/time"
             android:text="Time" />
@@ -131,7 +131,7 @@
             android:inputType="textMultiLine"
             android:ems="10"
             android:id="@+id/pubkey"
-            android:text="Public Encryptionn Key here." />
+            android:text="Public Encryption Key here." />
 
     </LinearLayout>
 </RelativeLayout>
