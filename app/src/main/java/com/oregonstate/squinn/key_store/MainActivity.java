@@ -44,7 +44,10 @@ public class MainActivity extends Activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent myintent = new Intent(this, LoginActivity.class);
+        startActivity(myintent);
         super.onCreate(savedInstanceState);
+        // setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_main);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -129,6 +132,8 @@ public class MainActivity extends Activity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent myintent = new Intent(this, LoginActivity.class);
+            startActivity(myintent);
             return true;
         }
 
@@ -220,5 +225,4 @@ public class MainActivity extends Activity
         Intent intent = new Intent(MainActivity.this, ViewActivity.class);
         startActivity(intent);
     }
-
 }
