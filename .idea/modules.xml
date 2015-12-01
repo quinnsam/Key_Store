@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Key_Store.iml" filepath="$PROJECT_DIR$/Key_Store.iml" />
-      <module fileurl="file:///media/Data/Alpha_Mint/squinn/AndroidStudioProjects/Key_Store/app/app.iml" filepath="/media/Data/Alpha_Mint/squinn/AndroidStudioProjects/Key_Store/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
