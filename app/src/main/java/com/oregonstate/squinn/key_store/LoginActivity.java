@@ -1,13 +1,14 @@
 package com.oregonstate.squinn.key_store;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
+import android.support.v4.app.FragmentActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -23,7 +24,7 @@ import com.google.android.gms.common.api.Status;
  * Activity to demonstrate basic retrieval of the Google user's ID, email address, and basic
  * profile.
  */
-public class LoginActivity extends Activity implements
+public class LoginActivity extends FragmentActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
 
@@ -59,7 +60,7 @@ public class LoginActivity extends Activity implements
         // Build a GoogleApiClient with access to the Google Sign-In API and the
         // options specified by gso.
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-        //        .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         // [END build_client]
@@ -136,6 +137,7 @@ public class LoginActivity extends Activity implements
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
+        finish();
     }
     // [END signIn]
 
@@ -150,6 +152,7 @@ public class LoginActivity extends Activity implements
                         // [END_EXCLUDE]
                     }
                 });
+        finish();
     }
     // [END signOut]
 
@@ -164,6 +167,7 @@ public class LoginActivity extends Activity implements
                         // [END_EXCLUDE]
                     }
                 });
+        finish();
     }
     // [END revokeAccess]
 

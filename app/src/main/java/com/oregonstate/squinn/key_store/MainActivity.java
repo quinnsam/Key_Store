@@ -134,7 +134,7 @@ public class MainActivity extends Activity
         if (id == R.id.action_settings) {
             Intent myintent = new Intent(this, LoginActivity.class);
             startActivity(myintent);
-            return true;
+            //return true;
         }
 
         return super.onOptionsItemSelected(item);
