@@ -136,6 +136,11 @@ public class save_menu_frag extends Fragment {
             android.widget.Toast.makeText(getActivity(), "Error Public Key is required", android.widget.Toast.LENGTH_SHORT).show();
             return;
         }
+        String print_userid = ((UserInfo) getActivity().getApplication()).getPersonId();
+        if ( print_userid == "" ) {
+            android.widget.Toast.makeText(getActivity(), "Error you must login first", android.widget.Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
         //String urlstring = "http://cs496-hw03-api.appspot.com/pubkey";
@@ -146,6 +151,7 @@ public class save_menu_frag extends Fragment {
         //conn.setRequestMethod("POST");
         //conn.setRequestProperty("Accept", "application/json");
         //conn.setUseCaches(false);
+        System.out.println(print_userid);
 
         Uri.Builder builder = new Uri.Builder()
                 .scheme("http")
@@ -159,7 +165,8 @@ public class save_menu_frag extends Fragment {
                 .appendQueryParameter("exp-date", print_expDate)
                 .appendQueryParameter("exp-time", print_expTime)
                 .appendQueryParameter("expiration", print_exp.toString())
-                .appendQueryParameter("pubkey", print_pubkey);
+                .appendQueryParameter("pubkey", print_pubkey)
+                .appendQueryParameter("google", print_userid);
 
         String query = builder.build().getEncodedQuery();
 

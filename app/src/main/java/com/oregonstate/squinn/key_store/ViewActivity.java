@@ -79,6 +79,8 @@ public class ViewActivity extends Activity {
             in.close();
 
             // Print Result
+            String userID = ((UserInfo) this.getApplication()).getPersonId();
+            String userName = ((UserInfo) this.getApplication()).getPersonName();
             String res = response.toString().substring(5);
             String[] ind = res.split("</pre><pre>");
             TextView output = (TextView)findViewById(R.id.viewAllKeys);
@@ -88,14 +90,19 @@ public class ViewActivity extends Activity {
                 temp.replaceAll(Pattern.quote("<pre>"), "");
                 System.out.println(temp.toString());
                 tempj = new JSONObject(temp);
-                output.append("Fullname: " + tempj.getString("fullname") + "\n");
-                output.append("\tEmail: " + tempj.getString("email") + "\n");
-                output.append("\tComment: " + tempj.getString("comment") + "\n");
-                output.append("\tExpiration: " + tempj.getString("exp") + "\n");
-                output.append("\t\tDate: " + tempj.getString("expDate") + "\n");
-                output.append("\t\tTime: " + tempj.getString("expTime") + "\n");
-                output.append("\tPublic Key: " + tempj.getString("pubkey") + "\n");
-                output.append("\tAPI Key: " + tempj.getString("key") + "\n\n");
+                //System.out.println(tempj.getString("google") + " : " + userID);
+                if ( tempj.getString("google").equals(userID)) {
+                    output.append("Google ID: " + userID + "\n");
+                    output.append("Google Name: " + userName + "\n");
+                    output.append("Fullname: " + tempj.getString("fullname") + "\n");
+                    output.append("\tEmail: " + tempj.getString("email") + "\n");
+                    output.append("\tComment: " + tempj.getString("comment") + "\n");
+                    output.append("\tExpiration: " + tempj.getString("exp") + "\n");
+                    output.append("\t\tDate: " + tempj.getString("expDate") + "\n");
+                    output.append("\t\tTime: " + tempj.getString("expTime") + "\n");
+                    output.append("\tPublic Key: " + tempj.getString("pubkey") + "\n");
+                    output.append("\tAPI Key: " + tempj.getString("key") + "\n\n");
+                }
             }
 
 

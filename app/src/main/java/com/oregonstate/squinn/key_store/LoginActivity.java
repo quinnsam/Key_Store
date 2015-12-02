@@ -30,6 +30,7 @@ public class LoginActivity extends FragmentActivity implements
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
+    private static int first = 0;
 
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
@@ -124,10 +125,18 @@ public class LoginActivity extends FragmentActivity implements
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
+            ((UserInfo) this.getApplication()).setPersonName(acct.getDisplayName());
+            ((UserInfo) this.getApplication()).setPersonId(acct.getId());
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);
+            if (first == 0 ) {
+                first = 1;
+                finish();
+            }
         } else {
             // Signed out, show unauthenticated UI.
+            ((UserInfo) this.getApplication()).setPersonId("");
+            ((UserInfo) this.getApplication()).setPersonName("");
             updateUI(false);
         }
     }
@@ -137,7 +146,7 @@ public class LoginActivity extends FragmentActivity implements
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
-        finish();
+        //finish();
     }
     // [END signIn]
 
@@ -152,6 +161,8 @@ public class LoginActivity extends FragmentActivity implements
                         // [END_EXCLUDE]
                     }
                 });
+        ((UserInfo) this.getApplication()).setPersonId("");
+        ((UserInfo) this.getApplication()).setPersonName("");
         finish();
     }
     // [END signOut]
@@ -167,6 +178,8 @@ public class LoginActivity extends FragmentActivity implements
                         // [END_EXCLUDE]
                     }
                 });
+        ((UserInfo) this.getApplication()).setPersonId("");
+        ((UserInfo) this.getApplication()).setPersonName("");
         finish();
     }
     // [END revokeAccess]
