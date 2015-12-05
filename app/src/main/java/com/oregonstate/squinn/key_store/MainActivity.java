@@ -227,4 +227,8 @@ public class MainActivity extends Activity
         Intent intent = new Intent(MainActivity.this, ViewActivity.class);
         startActivity(intent);
     }
+    public void openDelActivity(View view) {
+        Intent intent = new Intent(MainActivity.this, DelActivity.class);
+        startActivity(intent);
+    }
 }

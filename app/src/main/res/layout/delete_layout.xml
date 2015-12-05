@@ -11,4 +11,15 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="162dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Public Keys"
+        android:id="@+id/delKey"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:singleLine="true"
+        android:onClick="openDelActivity"/>
+
 </RelativeLayout>

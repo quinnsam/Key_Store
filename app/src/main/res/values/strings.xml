@@ -18,7 +18,8 @@
     <string name="title_activity_savekey">Save Pubkey</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_view">ViewActivity</string>
+    <string name="title_activity_view">View Public Keys</string>
+    <string name="title_activity_del">Delete Public Key</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
