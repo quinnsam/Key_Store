@@ -54,6 +54,18 @@ public class save_menu_frag extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Bundle bundle = this.getArguments();
+        System.out.println(bundle);
+        if (bundle != null){
+            System.out.println("AHHHHHH" + bundle.get("api_key"));
+            ((EditText) getActivity().findViewById(R.id.pubkey)).setText((String) bundle.get("api_key"));
+        }
+
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
@@ -130,6 +142,7 @@ public class save_menu_frag extends Fragment {
             }
             print_exp = Boolean.TRUE;
         }
+
         EditText edit_pubkey = (EditText) getActivity().findViewById(R.id.pubkey);
         String print_pubkey = edit_pubkey.getText().toString();
         if (print_pubkey.equals("Public Encryption Key here.") || print_pubkey.isEmpty()) {

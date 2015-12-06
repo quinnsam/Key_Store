@@ -80,6 +80,9 @@ public class MainActivity extends Activity
             case 2:
                 objFragment = new delete_menu_frag();
                 break;
+            case 3:
+                objFragment = new edit_menu_frag();
+                break;
         }
 
         // update the main content by replacing fragments
@@ -99,6 +102,9 @@ public class MainActivity extends Activity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = "Edit PubKey";
                 break;
         }
     }
@@ -229,6 +235,10 @@ public class MainActivity extends Activity
     }
     public void openDelActivity(View view) {
         Intent intent = new Intent(MainActivity.this, DelActivity.class);
+        startActivity(intent);
+    }
+    public void openEditActivity(View view) {
+        Intent intent = new Intent(MainActivity.this, Edit.class);
         startActivity(intent);
     }
 }

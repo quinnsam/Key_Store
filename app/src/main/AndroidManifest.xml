@@ -36,8 +36,13 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/ThemeOverlay.MyNoTitleActivity"></activity>
-        <activity android:name=".DelActivity" android:label="@string/title_activity_del"></activity>
+            android:theme="@style/ThemeOverlay.MyNoTitleActivity" />
+        <activity
+            android:name=".DelActivity"
+            android:label="@string/title_activity_del" />
+        <activity
+            android:name=".Edit"
+            android:label="Edit a Public Key" />
     </application>
 
 </manifest>

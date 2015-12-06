@@ -5,6 +5,7 @@
     <string name="title_section1">Save PubKey</string>
     <string name="title_section2">View PubKey</string>
     <string name="title_section3">Delete PubKey</string>
+    <string name="title_section4">Edit PubKey</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -151,4 +152,7 @@
     <!-- Server Client ID.  This should be a valid Web OAuth 2.0 Client ID obtained
          from https://console.developers.google.com/ -->
     <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
