@@ -44,6 +44,7 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class save_menu_frag extends Fragment {
     View rootview;
+    String apikey;
 
     @Nullable
     @Override
@@ -60,6 +61,7 @@ public class save_menu_frag extends Fragment {
         System.out.println(bundle);
         if (bundle != null){
             System.out.println("AHHHHHH" + bundle.get("api_key"));
+            apikey = (String) bundle.get("api_key");
             ((EditText) getActivity().findViewById(R.id.pubkey)).setText((String) bundle.get("api_key"));
         }
 
@@ -150,7 +152,7 @@ public class save_menu_frag extends Fragment {
             return;
         }
         String print_userid = ((UserInfo) getActivity().getApplication()).getPersonId();
-        if ( print_userid == "" ) {
+        if (print_userid == "") {
             android.widget.Toast.makeText(getActivity(), "Error you must login first", android.widget.Toast.LENGTH_SHORT).show();
             return;
         }
@@ -180,6 +182,8 @@ public class save_menu_frag extends Fragment {
                 .appendQueryParameter("expiration", print_exp.toString())
                 .appendQueryParameter("pubkey", print_pubkey)
                 .appendQueryParameter("google", print_userid);
+        if ( !apikey.isEmpty() )
+            builder.appendQueryParameter("id", apikey);
 
         String query = builder.build().getEncodedQuery();
 

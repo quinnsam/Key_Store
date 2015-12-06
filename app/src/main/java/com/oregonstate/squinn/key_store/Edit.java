@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 public class Edit extends FragmentActivity {
     ListView listView;
-    String hello;
+    //add strings here String
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
