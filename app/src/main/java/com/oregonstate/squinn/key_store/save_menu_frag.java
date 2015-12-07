@@ -44,7 +44,7 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class save_menu_frag extends Fragment {
     View rootview;
-    String apikey;
+    String apikey = "";
 
     @Nullable
     @Override
@@ -62,7 +62,10 @@ public class save_menu_frag extends Fragment {
         if (bundle != null){
             System.out.println("AHHHHHH" + bundle.get("api_key"));
             apikey = (String) bundle.get("api_key");
-            ((EditText) getActivity().findViewById(R.id.pubkey)).setText((String) bundle.get("api_key"));
+            ((EditText) getActivity().findViewById(R.id.name)).setText((String) bundle.get("name"));
+            ((EditText) getActivity().findViewById(R.id.email)).setText((String) bundle.get("email"));
+            ((EditText) getActivity().findViewById(R.id.comment)).setText((String) bundle.get("comment"));
+            ((EditText) getActivity().findViewById(R.id.pubkey)).setText((String) bundle.get("pubkey"));
         }
 
     }
@@ -176,7 +179,6 @@ public class save_menu_frag extends Fragment {
                 .appendQueryParameter("email", print_email)
                 .appendQueryParameter("comment", print_comment)
                 .appendQueryParameter("Encryption-type", print_encType)
-                .appendQueryParameter("bit-strenght", print_comment)
                 .appendQueryParameter("exp-date", print_expDate)
                 .appendQueryParameter("exp-time", print_expTime)
                 .appendQueryParameter("expiration", print_exp.toString())

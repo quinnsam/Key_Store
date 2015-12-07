@@ -29,6 +29,11 @@ import java.util.regex.Pattern;
 public class Edit extends FragmentActivity {
     ListView listView;
     //add strings here String
+    String api_key;
+    String pass_name;
+    String pass_email;
+    String pass_comment;
+    String pass_pubkey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +76,22 @@ public class Edit extends FragmentActivity {
                 // Show Alert
                 String p = itemValue.substring(itemValue.length() - 16, itemValue.length());
 
+                api_key = p;
+                try {
+                    getAllPubkeys(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 // Send to SaveKey with api key
                 // update the main content by replacing fragments
                 Bundle bundle = new Bundle();
                 bundle.putString("api_key", p);
+                bundle.putString("name", pass_name);
+                bundle.putString("email", pass_email);
+                bundle.putString("comment", pass_comment);
+                bundle.putString("pubkey", pass_pubkey);
+
                 Fragment objFragment = new save_menu_frag();
                 objFragment.setArguments(bundle);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -106,8 +123,12 @@ public class Edit extends FragmentActivity {
         if (isNetworkAvailable()) {
             System.out.println("Connected to saving to API");
             // Configure Connection
-            //if (singleKey) {
-                String urlstring = "http://cs496-hw03-api.appspot.com/pubkey";
+            String urlstring;
+            if (singleKey) {
+                urlstring = "http://cs496-hw03-api.appspot.com/pubkey/" + api_key;
+            } else {
+                urlstring = "http://cs496-hw03-api.appspot.com/pubkey";
+            }
             URL url = new URL(urlstring);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -153,6 +174,12 @@ public class Edit extends FragmentActivity {
                 //System.out.println(tempj.getString("google") + " : " + userID);
                 if ( tempj.getString("google").equals(userID)) {
                     temp_out = "Fullname: " + tempj.getString("fullname") + "\n" + "API Key: " + tempj.getString("key");
+                    if (singleKey) {
+                        pass_name = tempj.getString("fullname");
+                        pass_email = tempj.getString("email");
+                        pass_comment = tempj.getString("comment");
+                        pass_pubkey = tempj.getString("pubkey");
+                    }
                 }
                 if (! temp_out.isEmpty())
                     output.add(temp_out);
